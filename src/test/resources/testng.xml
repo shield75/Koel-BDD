@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="CucumberSuite" parallel="tests" thread-count="1">
+    <!-- TestNG Suite for Cucumber BDD -->
+    <test name="CucumberTest">
+        <classes>
+            <class name="cucumberRunner.CucumberRunner" />
+        </classes>
+    </test>
+</suite>
