@@ -1,24 +1,24 @@
 package hooks;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import io.cucumber.java.After;
 import utils.DriverManager;
 
 public class Hooks {
-    private WebDriver driver;
 
-    @BeforeClass
-    public void setUp() {
-        driver = DriverManager.getDriver(); // Initialize the WebDriver
-        driver.manage().window().fullscreen();
-        System.out.printf("hi");// Maximize the browser window
+    // Initialize WebDriver before each scenario
+    @Before
+    public void setup() {
+        System.out.println("Setting up WebDriver...");
+        DriverManager.getDriver();  // Initialize the driver
+        DriverManager.getDriver().get("https://qa.koel.app/");  // Open the URL
+        System.out.println("Navigating to URL: https://qa.koel.app/");
     }
 
-    @AfterClass
+    // Quit WebDriver after each scenario
+    @After
     public void tearDown() {
-        DriverManager.quitDriver(); // Quit the driver after the test
+        System.out.println("Tearing down WebDriver...");
+        DriverManager.quitDriver();  // Quit the driver
     }
 }

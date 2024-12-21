@@ -10,21 +10,18 @@ import pages.ProfileAndPreferences;
 import utils.DriverManager;
 
 public class UpdateEmailStepDefinition {
-    WebDriver driver;
-    LoginPage loginPage;
-    HomePage homePage;
+    public WebDriver driver;
+    public LoginPage loginPage;
+    public HomePage homePage;
     ProfileAndPreferences profileAndPreferences;
 
-    public  UpdateEmailStepDefinition() {
+
+    @Given("The user is logged into the koel app using and is in the profile and preference page")
+    public void theUserIsLoggedIntoTheKoelAppUsingAndIsInTheProfileAndPreferencePage() throws InterruptedException {
         driver = DriverManager.getDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         profileAndPreferences = new ProfileAndPreferences(driver);
-    }
-
-    @Given("The user is logged into the koel app using and is in the profile and preference page")
-    public void theUserIsLoggedIntoTheKoelAppUsingAndIsInTheProfileAndPreferencePage() throws InterruptedException {
-        DriverManager.getDriver().get("https://qa.koel.app/");
 
         loginPage.provideEmail("rumenul.rimon@testpro.io")
                 .providePassword("27041575")

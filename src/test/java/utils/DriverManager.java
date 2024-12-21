@@ -1,18 +1,26 @@
 package utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverManager {
+
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
-        if (driver == null) { // If driver is not already initialized
-            WebDriverManager.chromedriver().setup(); // Set up ChromeDriver
-            driver = new ChromeDriver();
+        if (driver == null) {
+            // Setup WebDriverManager to automatically download and set up ChromeDriver
+            WebDriverManager.chromedriver().setup();
+
+            // Add Chrome options if needed
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-popup-blocking");
+
             // Initialize the driver
-            System.out.println("WebDriver initialized");
+            driver = new ChromeDriver(options);
         }
         return driver;
     }
@@ -20,7 +28,6 @@ public class DriverManager {
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();
-            driver.close();
             driver = null;
         }
     }
