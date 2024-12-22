@@ -17,7 +17,25 @@ Feature: Update Email
     Given The user is logged into the koel app using and is in the profile and preference page
     When Enter a new email address "<newEmail>" and save
     Then the mail should be updated and message "<expectedMessage>" should be displayed
+    And the updated email "<newEmail>" should be saved in the database
 
     Examples:
       | newEmail               | expectedMessage  |
       | valid.email@testpro.io | Profile updated. |
+
+  Scenario Outline: Update email with a valid email address and then again login with old and updated email
+    Given The user is logged into the koel app using and is in the profile and preference page
+    When Enter a new email address "<newEmail>" and save
+    Then the mail should be updated and message "<expectedMessage>" should be displayed
+    When The user logs out from the Koel app
+    Then The user should be on the login page
+    When The user tries to log in with the old email "<oldEmail>"
+    Then The user should not be able to log in and remain on the login page
+    When The user tries to log in with the new email "<newEmail>"
+    Then The user should be able to log in successfully
+
+    Examples:
+      | oldEmail                 | newEmail               | expectedMessage  |
+      | rumenul.rimon@testpro.io | valid.email@testpro.io | Profile updated. |
+
+

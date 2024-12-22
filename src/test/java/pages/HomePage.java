@@ -38,6 +38,8 @@ public class HomePage extends BasePage{
     WebElement pauseBtn;
     @FindBy(css = "img.avatar")
     WebElement avatar;
+    @FindBy(css = ".fa.fa-sign-out")
+    WebElement logOut;
 
     public WebElement findSpecificPlayList(String playListName) {
         return (driver.findElement(By.xpath("//section[@id='songResultsWrapper']//ul/li[contains(text(), '" + playListName + "')]")));
@@ -96,6 +98,10 @@ public class HomePage extends BasePage{
 
     public void clickOnAvatar() {
         wait.until(ExpectedConditions.elementToBeClickable(avatar)).click();
+    }
+
+    public void clickOnLogOut(){
+        wait.until(ExpectedConditions.elementToBeClickable(logOut)).click();
     }
 
 }

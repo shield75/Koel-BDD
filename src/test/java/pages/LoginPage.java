@@ -18,12 +18,17 @@ public class LoginPage extends BasePage{
     @FindBy(css = "a[href='registration']")
     WebElement registrationLink;
 
+    public String fromProfileUrl = "https://qa.koel.app/#!/profile";
+
     public LoginPage provideEmail(String email) {
+
+        emailField.clear();
         emailField.sendKeys(email);
         return this;
     }
 
     public LoginPage providePassword(String password) {
+        passwordField.clear();
         passwordField.sendKeys(password);
         return this;
     }
