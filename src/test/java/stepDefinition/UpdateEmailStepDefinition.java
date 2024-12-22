@@ -40,11 +40,16 @@ public class UpdateEmailStepDefinition {
         profileAndPreferences.clickOnSaveButton();
     }
 
-    @Then("The mail {string} should be validated with {string}")
+    @Then("The mail {string} should not be updated and validated with {string}")
     public void theMailShouldBeValidatedWith(String email, String expectedMessage) {
         status = profileAndPreferences.verifyResponseMessage(expectedMessage);
         if(!status){
             updatedEmail = email;
         }
+    }
+
+    @Then("the mail should be updated and message {string} should be displayed")
+    public void theMailShouldBeUpdatedAndMessageShouldBeDisplayed(String expectedMessage) {
+        profileAndPreferences.verifyResponseMessage(expectedMessage);
     }
 }
