@@ -15,6 +15,9 @@ public class UpdateEmailStepDefinition {
     public HomePage homePage;
     ProfileAndPreferences profileAndPreferences;
 
+    public String updatedEmail;
+    public boolean status = true;
+
 
     @Given("The user is logged into the koel app using and is in the profile and preference page")
     public void theUserIsLoggedIntoTheKoelAppUsingAndIsInTheProfileAndPreferencePage() throws InterruptedException {
@@ -22,24 +25,26 @@ public class UpdateEmailStepDefinition {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         profileAndPreferences = new ProfileAndPreferences(driver);
-
-        loginPage.provideEmail("rumenul.rimon@testpro.io")
-                .providePassword("27041575")
-                .clickSubmit();
-        Thread.sleep(5000);
-        homePage.clickOnAvatar();
     }
 
     @When("Enter a new email address {string} and save")
     public void enterANewEmailAddressAndSave(String email) throws InterruptedException {
         Thread.sleep(5000);
         profileAndPreferences.provideCurrentPassword("27041575");
-        profileAndPreferences.provideNewEmailAddress(email);
+        if(!status){
+            profileAndPreferences.provideNewEmailAddress(updatedEmail);
+        }
+        else{
+            profileAndPreferences.provideNewEmailAddress(email);
+        }
         profileAndPreferences.clickOnSaveButton();
     }
 
-    @Then("the mail should be validated with {string}")
-    public void theMailShouldBeValidatedWith(String expectedMessage) {
-        profileAndPreferences.verifyResponseMessage(expectedMessage);
+    @Then("The mail {string} should be validated with {string}")
+    public void theMailShouldBeValidatedWith(String email, String expectedMessage) {
+        status = profileAndPreferences.verifyResponseMessage(expectedMessage);
+        if(!status){
+            updatedEmail = email;
+        }
     }
 }

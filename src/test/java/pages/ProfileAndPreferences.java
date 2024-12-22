@@ -28,6 +28,7 @@ public class ProfileAndPreferences extends BasePage{
 
     public void provideCurrentPassword(String password) {
         findElement(currentPasswordField).click();
+        findElement(currentPasswordField).clear();
         currentPasswordField.sendKeys(password);
     }
 
@@ -46,12 +47,15 @@ public class ProfileAndPreferences extends BasePage{
         saveButton.click();
     }
 
-    public void verifyResponseMessage(String expectedMessage) {
+    public boolean  verifyResponseMessage(String expectedMessage) {
         try {
             findElement(alertMessage).isDisplayed();
             Assert.assertEquals(alertMessage.getText(), expectedMessage, "Response message mismatched");
+
+            return true;
         }catch (Exception e) {
             Assert.assertEquals(emailAddressField.getAttribute("validationMessage"), expectedMessage, "Validation message mismatched");
+            return  false;
         }
     }
 }
