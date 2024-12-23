@@ -49,6 +49,7 @@ public class HomePage extends BasePage{
 
     public HomePage searchSong(String songName) throws IOException {
         findElement((searchField)).click();
+        findElement((searchField)).clear();
         findElement(searchField).sendKeys(songName);
         findElement(songInSearchResult);
         return this;

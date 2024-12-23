@@ -34,7 +34,6 @@ public class Hooks {
                 .providePassword("27041575")
                 .clickSubmit();
         Thread.sleep(3000);
-        homePage.clickOnAvatar();
     }
 
     // Quit WebDriver after each scenario

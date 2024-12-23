@@ -31,6 +31,7 @@ public class UpdateEmailStepDefinition {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         profileAndPreferences = new ProfileAndPreferences(driver);
+        homePage.clickOnAvatar();
     }
 
     @When("Enter a new email address {string} and save")
